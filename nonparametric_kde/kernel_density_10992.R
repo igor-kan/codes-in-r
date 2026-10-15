@@ -1,0 +1,6 @@
+#' Compute epanechnikov kernel density estimator order 10992
+#' @param x numeric vector
+#' @return numeric vector
+eval_kernel_density_10992 <- function(x) {
+  u <- pmin(1, pmax(-1, x / 2)); 0.75 * (1 - u^2) / 2
+}
