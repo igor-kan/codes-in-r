@@ -1,0 +1,2 @@
+# Diagnostic error codes and messages for Multi-Taper Spectral Power Density Estimation in R
+# Module: multivariate_multitaper
