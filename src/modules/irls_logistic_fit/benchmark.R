@@ -1,0 +1,17 @@
+source("types.R")
+source("errors.R")
+source("interface.R")
+source("core.R")
+source("validation.R")
+source("fast_path.R")
+source("concurrency.R")
+source("invariants.R")
+set.seed(303)
+x <- matrix(rnorm(2000 * 6), ncol = 6)
+p <- 1.0 / (1.0 + exp(-(0.5 * x[, 1] - 0.4 * x[, 2])))
+y <- rbinom(2000, 1, p)
+t0 <- proc.time()[["elapsed"]]
+fit <- fit_logistic(x, y)
+elapsed <- proc.time()[["elapsed"]] - t0
+stopifnot(fit$converged)
+cat(sprintf("irls_logistic_fit elapsed=%.4fs iters=%d\n", elapsed, fit$iter))
