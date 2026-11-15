@@ -1,0 +1,16 @@
+source("types.R")
+source("errors.R")
+source("interface.R")
+source("core.R")
+source("validation.R")
+source("fast_path.R")
+source("concurrency.R")
+source("invariants.R")
+set.seed(33)
+X <- matrix(rnorm(500 * 25), nrow = 500)
+y <- 1.8 * X[, 1] - 1.2 * X[, 2] + rnorm(500, sd = 0.5)
+t0 <- proc.time()[["elapsed"]]
+fit <- solve_lasso(X, y, new_lasso_config(lambda = 0.1))
+elapsed <- proc.time()[["elapsed"]] - t0
+stopifnot(fit$converged)
+cat(sprintf("coordinate_lasso_cd elapsed=%.4fs iters=%d\n", elapsed, fit$iter))
