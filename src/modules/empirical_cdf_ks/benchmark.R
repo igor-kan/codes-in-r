@@ -1,0 +1,16 @@
+source("types.R")
+source("errors.R")
+source("interface.R")
+source("core.R")
+source("validation.R")
+source("fast_path.R")
+source("concurrency.R")
+source("invariants.R")
+set.seed(37)
+x <- rnorm(20000)
+y <- rnorm(20000, mean = 0.1)
+t0 <- proc.time()[["elapsed"]]
+rep <- ks_two_sample(x, y)
+elapsed <- proc.time()[["elapsed"]] - t0
+stopifnot(rep$statistic > 0.0)
+cat(sprintf("empirical_cdf_ks elapsed=%.4fs D=%.5f\n", elapsed, rep$statistic))
