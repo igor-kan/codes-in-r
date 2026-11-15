@@ -1,0 +1,15 @@
+source("types.R")
+source("errors.R")
+source("interface.R")
+source("core.R")
+source("validation.R")
+source("fast_path.R")
+source("concurrency.R")
+source("invariants.R")
+set.seed(39)
+y <- cumsum(rnorm(20000)) + rnorm(20000)
+t0 <- proc.time()[["elapsed"]]
+res <- run_kalman_smoother(y, new_kf_model(1.0, 0.2))
+elapsed <- proc.time()[["elapsed"]] - t0
+stopifnot(is.finite(res$loglik))
+cat(sprintf("kalman_local_level elapsed=%.4fs ll=%.2f\n", elapsed, res$loglik))
