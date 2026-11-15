@@ -1,0 +1,17 @@
+source("types.R")
+source("errors.R")
+source("interface.R")
+source("core.R")
+source("validation.R")
+source("fast_path.R")
+source("concurrency.R")
+source("invariants.R")
+set.seed(81)
+for (trial in 1:8) {
+  y <- seq_len(40) * 0.2 + rnorm(40, sd = 1.5)
+  w <- runif(40, min = 0.5, max = 3.0)
+  fit <- fit_isotonic_pava(y, w)
+  verify_pava_invariants(y, w, fit)
+  fit_unw <- fit_isotonic_pava(y)
+  stopifnot(max(abs(fit_unw$fitted - stats::isoreg(y)$yf)) < 1e-12)
+}
