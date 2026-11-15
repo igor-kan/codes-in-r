@@ -1,0 +1,16 @@
+source("types.R")
+source("errors.R")
+source("interface.R")
+source("core.R")
+source("validation.R")
+source("fast_path.R")
+source("concurrency.R")
+source("invariants.R")
+set.seed(15)
+n <- 12
+M <- matrix(rnorm(n * n), n, n)
+A <- 0.5 * (M + t(M))
+res <- lanczos_tridiagonalize(A, k = n)
+verify_lanczos_invariants(A, res)
+exact <- eigen(A, symmetric = TRUE, only.values = TRUE)$values
+stopifnot(max(abs(sort(res$ritz_values) - sort(exact))) < 1e-10)
