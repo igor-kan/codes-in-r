@@ -1,0 +1,17 @@
+source("types.R")
+source("errors.R")
+source("interface.R")
+source("core.R")
+source("validation.R")
+source("fast_path.R")
+source("concurrency.R")
+source("invariants.R")
+set.seed(27)
+for (k in 1:6) {
+  x <- runif(35 + k)
+  y <- rbeta(45, 2, 3)
+  rep <- ks_two_sample(x, y)
+  verify_ks_properties(x, y, rep)
+  ref <- unname(stats::ks.test(x, y)$statistic)
+  stopifnot(abs(rep$statistic - ref) < 1e-12)
+}
