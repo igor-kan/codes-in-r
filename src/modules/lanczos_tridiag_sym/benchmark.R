@@ -1,0 +1,16 @@
+source("types.R")
+source("errors.R")
+source("interface.R")
+source("core.R")
+source("validation.R")
+source("fast_path.R")
+source("concurrency.R")
+source("invariants.R")
+set.seed(25)
+M <- matrix(rnorm(120 * 120), 120, 120)
+A <- M + t(M)
+t0 <- proc.time()[["elapsed"]]
+res <- lanczos_tridiagonalize(A, k = 25L)
+elapsed <- proc.time()[["elapsed"]] - t0
+stopifnot(length(res$ritz_values) == 25L)
+cat(sprintf("lanczos_tridiag_sym elapsed=%.4fs max_eig=%.3f\n", elapsed, res$ritz_values[1L]))
