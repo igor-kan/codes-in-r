@@ -1,0 +1,15 @@
+source("types.R")
+source("errors.R")
+source("interface.R")
+source("core.R")
+source("validation.R")
+source("fast_path.R")
+source("concurrency.R")
+source("invariants.R")
+set.seed(789)
+A <- matrix(rnorm(200 * 30), nrow = 200, ncol = 30)
+t0 <- proc.time()[["elapsed"]]
+qr_res <- mgs_decompose(A, reorth = TRUE)
+elapsed <- proc.time()[["elapsed"]] - t0
+stopifnot(ortho_error_norm(qr_res$Q) < 1e-11)
+cat(sprintf("gram_schmidt_qr_r elapsed=%.4fs\n", elapsed))
