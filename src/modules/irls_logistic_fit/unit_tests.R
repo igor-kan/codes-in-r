@@ -1,0 +1,17 @@
+source("types.R")
+source("errors.R")
+source("interface.R")
+source("core.R")
+source("validation.R")
+source("fast_path.R")
+source("concurrency.R")
+source("invariants.R")
+set.seed(101)
+n <- 120
+x <- cbind(x1 = rnorm(n), x2 = rnorm(n))
+eta <- -0.4 + 1.5 * x[, 1] - 0.9 * x[, 2]
+y <- rbinom(n, size = 1, prob = 1.0 / (1.0 + exp(-eta)))
+fit <- fit_logistic(x, y)
+verify_logistic_fit(x, y, fit)
+ref <- stats::glm(y ~ x[, 1] + x[, 2], family = stats::binomial())
+stopifnot(max(abs(unname(fit$coef) - unname(stats::coef(ref)))) < 1e-6)
