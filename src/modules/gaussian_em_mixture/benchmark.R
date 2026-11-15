@@ -1,0 +1,15 @@
+source("types.R")
+source("errors.R")
+source("interface.R")
+source("core.R")
+source("validation.R")
+source("fast_path.R")
+source("concurrency.R")
+source("invariants.R")
+set.seed(66)
+x <- c(rnorm(1500, -2, 0.7), rnorm(1500, 2.5, 0.8))
+t0 <- proc.time()[["elapsed"]]
+fit <- fit_gaussian_em(x, new_gmm_config(k = 2L))
+elapsed <- proc.time()[["elapsed"]] - t0
+stopifnot(fit$converged)
+cat(sprintf("gaussian_em_mixture elapsed=%.4fs\n", elapsed))
