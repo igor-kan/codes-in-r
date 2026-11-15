@@ -1,0 +1,16 @@
+source("types.R")
+source("errors.R")
+source("interface.R")
+source("core.R")
+source("validation.R")
+source("fast_path.R")
+source("concurrency.R")
+source("invariants.R")
+set.seed(202)
+for (trial in 1:6) {
+  x <- matrix(rnorm(80 * 2), ncol = 2)
+  p <- 1.0 / (1.0 + exp(-(0.5 * x[, 1] - 0.5 * x[, 2])))
+  y <- rbinom(80, 1, p)
+  fit <- fit_logistic(x, y)
+  verify_logistic_fit(x, y, fit)
+}
