@@ -1,0 +1,18 @@
+source("types.R")
+source("errors.R")
+source("interface.R")
+source("core.R")
+source("validation.R")
+source("fast_path.R")
+source("concurrency.R")
+source("invariants.R")
+set.seed(456)
+for (trial in 1:6) {
+  A <- matrix(rnorm(30 * 6), nrow = 30, ncol = 6)
+  qr_res <- mgs_decompose(A, reorth = TRUE)
+  verify_mgs_qr(A, qr_res)
+  B <- matrix(rnorm(30 * 3), nrow = 30)
+  X <- batch_qr_solve(qr_res, B)
+  res_orth <- crossprod(A, B - A %*% X)
+  stopifnot(max(abs(res_orth)) < 1e-9)
+}
