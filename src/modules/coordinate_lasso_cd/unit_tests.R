@@ -1,0 +1,16 @@
+source("types.R")
+source("errors.R")
+source("interface.R")
+source("core.R")
+source("validation.R")
+source("fast_path.R")
+source("concurrency.R")
+source("invariants.R")
+set.seed(11)
+n <- 100
+p <- 5
+X <- scale(matrix(rnorm(n * p), nrow = n, ncol = p))
+y <- 2.5 * X[, 1] - 1.5 * X[, 3] + rnorm(n, sd = 0.2)
+fit <- solve_lasso(X, y, new_lasso_config(lambda = 0.15))
+verify_lasso_solution(X, y, fit, 0.15)
+stopifnot(abs(fit$beta[1]) > 1.0 && abs(fit$beta[3]) > 0.8)
