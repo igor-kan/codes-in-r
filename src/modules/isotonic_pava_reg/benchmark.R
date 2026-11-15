@@ -1,0 +1,15 @@
+source("types.R")
+source("errors.R")
+source("interface.R")
+source("core.R")
+source("validation.R")
+source("fast_path.R")
+source("concurrency.R")
+source("invariants.R")
+set.seed(91)
+y <- seq_len(50000) * 0.001 + rnorm(50000)
+t0 <- proc.time()[["elapsed"]]
+fit <- fit_isotonic_pava(y)
+elapsed <- proc.time()[["elapsed"]] - t0
+stopifnot(fit$block_count >= 1L)
+cat(sprintf("isotonic_pava_reg elapsed=%.4fs blocks=%d\n", elapsed, fit$block_count))
