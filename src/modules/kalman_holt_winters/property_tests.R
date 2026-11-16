@@ -1,0 +1,13 @@
+source("types.R")
+source("errors.R")
+source("interface.R")
+source("core.R")
+source("validation.R")
+source("fast_path.R")
+source("concurrency.R")
+source("invariants.R")
+
+set.seed(123)
+batch <- lapply(1:4, function(i) 10.0 + 0.5 * (1:40) + rnorm(40, sd = 0.2))
+mods <- batch_fit_holt(batch)
+for (i in seq_along(mods)) verify_holt_forecast(mods[[i]], batch[[i]])
