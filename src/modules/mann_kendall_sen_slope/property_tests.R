@@ -1,0 +1,13 @@
+source("types.R")
+source("errors.R")
+source("interface.R")
+source("core.R")
+source("validation.R")
+source("fast_path.R")
+source("concurrency.R")
+source("invariants.R")
+
+set.seed(11)
+series <- lapply(1:6, function(k) 0.8 * (1:30) + rnorm(30, sd = 0.5))
+outs <- batch_mann_kendall(series)
+mk_assert(all(vapply(outs, function(r) r$slope > 0.0 && r$S > 0.0, logical(1L))), "positive trend missed")
