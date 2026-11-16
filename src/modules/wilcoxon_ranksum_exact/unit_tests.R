@@ -1,0 +1,12 @@
+source("types.R")
+source("errors.R")
+source("interface.R")
+source("core.R")
+source("validation.R")
+source("fast_path.R")
+source("concurrency.R")
+source("invariants.R")
+
+x <- c(12.1, 14.3, 15.0, 15.0, 18.2, 20.4, 22.1)
+y <- c(8.4, 9.5, 11.2, 11.2, 12.8, 13.9, 14.8)
+verify_mann_whitney_sum(x, y)
