@@ -1,0 +1,5 @@
+source('types.R'); source('errors.R'); source('interface.R'); source('validation.R'); source('core.R'); source('invariants.R')
+x <- c(10, 20, 20, 35, 50, 40)
+y <- c(2, 5, 4, 8, 9, 8)
+res <- rank_correlate(x, y)
+verify_matches_base_cor(x, y, res)
