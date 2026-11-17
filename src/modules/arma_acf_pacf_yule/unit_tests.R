@@ -1,0 +1,8 @@
+source('types.R')
+source('errors.R')
+source('core.R')
+set.seed(1)
+x <- as.numeric(arima.sim(list(ar = c(0.6)), n = 120))
+r <- compute_acf_pacf(x, 4L)
+ref <- as.numeric(pacf(x, lag.max = 4L, plot = FALSE)$acf)
+stopifnot(max(abs(r$pacf - ref)) < 1e-12)
