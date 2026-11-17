@@ -1,0 +1,7 @@
+source('types.R')
+source('errors.R')
+source('core.R')
+X <- cbind(1, rnorm(30))
+y <- 1 - 2*X[,2] + rnorm(30)
+f <- fit_wls(X, y, rep(1, 30))
+stopifnot(all(f$se_hc0 > 0))
