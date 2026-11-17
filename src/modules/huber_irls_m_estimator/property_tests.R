@@ -1,0 +1,10 @@
+source('types.R')
+source('errors.R')
+source('core.R')
+set.seed(3)
+x <- rnorm(40)
+X <- cbind(1, x)
+y <- 5*x + rnorm(40, sd=0.1)
+y[1] <- -200
+h <- fit_huber_irls(X, y)
+stopifnot(abs(h$beta[2] - 5.0) < 0.25)
