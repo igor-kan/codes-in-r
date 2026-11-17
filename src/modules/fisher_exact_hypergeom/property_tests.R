@@ -1,0 +1,6 @@
+source('types.R')
+source('errors.R')
+source('core.R')
+m <- matrix(c(5, 5, 5, 5), 2, 2)
+r <- fisher_2x2(5, 5, 5, 5)
+stopifnot(abs(r$p_two_sided - 1.0) < 1e-12)
