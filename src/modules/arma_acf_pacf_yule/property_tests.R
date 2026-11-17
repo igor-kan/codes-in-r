@@ -1,0 +1,7 @@
+source('types.R')
+source('errors.R')
+source('core.R')
+set.seed(9)
+x <- rnorm(80)
+r <- compute_acf_pacf(x, 6L)
+stopifnot(all(abs(r$pacf) <= 1.0))
