@@ -1,0 +1,8 @@
+source('types.R')
+source('errors.R')
+source('core.R')
+tm <- c(2,4,6,8, 10,12,14,16)
+st <- rep(1,8)
+gp <- c(1,1,1,1, 2,2,2,2)
+r <- logrank_two_sample(tm, st, gp)
+stopifnot(r$stat > 4.0 && r$pval < 0.05)
