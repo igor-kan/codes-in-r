@@ -1,0 +1,8 @@
+source("types.R")
+source("errors.R")
+source("fast_path.R")
+source("core.R")
+stopifnot(abs(fast_centered_ss(c(1, 2, 3)) - 2.0) < 1e-12)
+y <- c(2, 4, 6, 8, 10)
+r <- box_cox_profile(y, c(0.0, 1.0))
+stopifnot(is.finite(r$loglik))
