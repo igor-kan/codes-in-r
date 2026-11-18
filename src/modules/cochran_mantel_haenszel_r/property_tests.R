@@ -1,0 +1,7 @@
+source("types.R")
+source("errors.R")
+source("fast_path.R")
+source("core.R")
+stopifnot(abs(fast_centered_ss(c(1, 2, 3)) - 2.0) < 1e-12)
+arr <- array(c(8, 8, 8, 8,  6, 6, 6, 6), dim = c(2, 2, 2))
+stopifnot(abs(cmh_2x2xk(arr)$common_or - 1.0) < 1e-12)
