@@ -1,0 +1,7 @@
+source("types.R")
+source("errors.R")
+source("fast_path.R")
+source("core.R")
+stopifnot(abs(fast_centered_ss(c(1, 2, 3)) - 2.0) < 1e-12)
+r <- nelson_aalen(c(1, 2, 3), c(1L, 1L, 1L))
+stopifnot(abs(r$H[3] - (1/3 + 1/2 + 1)) < 1e-12)
