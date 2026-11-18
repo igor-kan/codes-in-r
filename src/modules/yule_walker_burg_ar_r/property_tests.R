@@ -1,0 +1,8 @@
+source("types.R")
+source("errors.R")
+source("fast_path.R")
+source("core.R")
+stopifnot(abs(fast_centered_ss(c(1, 2, 3)) - 2.0) < 1e-12)
+x <- c(1, -1, 1, -1, 1, -1, 1, -1)
+r <- fit_yule_walker(x, 1L)
+stopifnot(r$phi[1] < -0.5)
