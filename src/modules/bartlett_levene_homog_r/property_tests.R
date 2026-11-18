@@ -1,0 +1,8 @@
+source("types.R")
+source("errors.R")
+source("fast_path.R")
+source("core.R")
+stopifnot(abs(fast_centered_ss(c(1, 2, 3)) - 2.0) < 1e-12)
+vals <- c(1, 2, 3, 1, 2, 3)
+grps <- c(1, 1, 1, 2, 2, 2)
+stopifnot(abs(variance_homogeneity(vals, grps)$bartlett_k2) < 1e-12)
