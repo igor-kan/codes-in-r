@@ -1,0 +1,8 @@
+source("types.R")
+source("errors.R")
+source("fast_path.R")
+source("core.R")
+stopifnot(abs(fast_centered_ss(c(1, 2, 3)) - 2.0) < 1e-12)
+vals <- c(10, 10, 10, 10)
+grps <- c(1, 1, 2, 2)
+stopifnot(jonckheere_terpstra(vals, grps)$z_score == 0.0)
