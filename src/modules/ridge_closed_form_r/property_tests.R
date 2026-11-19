@@ -1,0 +1,6 @@
+source("types.R")
+source("errors.R")
+source("fast_path.R")
+source("core.R")
+stopifnot(abs(fast_centered_ss(c(1, 2, 3)) - 2.0) < 1e-12)
+X <- diag(3); y <- c(2, 4, 6); r <- ridge_svd_fit(X, y, 1.0); stopifnot(abs(r$df_eff - 1.5) < 1e-12)
