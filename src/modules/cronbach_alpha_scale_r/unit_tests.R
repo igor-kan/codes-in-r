@@ -1,0 +1,11 @@
+source("types.R")
+source("errors.R")
+source("validation.R")
+source("core.R")
+source("invariants.R")
+check_numeric_vec(c(1.0, 2.0))
+x <- 1:10
+m_par <- cbind(x, 2 * x + 1, 3 * x - 4)
+r <- cronbach_alpha(m_par)
+stopifnot(r$alpha > 0.9 && r$alpha <= 1.0)
+ensure_stat_invariant(TRUE)
