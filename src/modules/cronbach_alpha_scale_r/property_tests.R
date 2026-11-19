@@ -1,0 +1,6 @@
+source("types.R")
+source("errors.R")
+source("fast_path.R")
+source("core.R")
+stopifnot(abs(fast_centered_ss(c(1, 2, 3)) - 2.0) < 1e-12)
+m_eq <- matrix(c(1,2,3,4, 1,2,3,4, 1,2,3,4), ncol = 3); stopifnot(abs(cronbach_alpha(m_eq)$alpha - 1.0) < 1e-12)
