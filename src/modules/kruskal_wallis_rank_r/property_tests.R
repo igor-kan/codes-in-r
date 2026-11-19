@@ -1,0 +1,6 @@
+source("types.R")
+source("errors.R")
+source("fast_path.R")
+source("core.R")
+stopifnot(abs(fast_centered_ss(c(1, 2, 3)) - 2.0) < 1e-12)
+v <- c(1, 2, 1, 2); g <- c(1, 1, 2, 2); stopifnot(abs(kruskal_wallis_h(v, g)$H) < 1e-12)
