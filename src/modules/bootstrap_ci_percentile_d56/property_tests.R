@@ -1,0 +1,8 @@
+source("types.R")
+source("errors.R")
+source("fast_path.R")
+source("core.R")
+stopifnot(abs(fast_centered_ss(c(1, 2, 3)) - 2.0) < 1e-12)
+c1 <- boot_mean_ci(c(1, 2, 3, 4), B = 100L, seed = 99L)
+c2 <- boot_mean_ci(c(1, 2, 3, 4), B = 100L, seed = 99L)
+stopifnot(abs(c1$lo - c2$lo) < 1e-12 && abs(c1$hi - c2$hi) < 1e-12)
