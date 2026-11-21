@@ -1,0 +1,11 @@
+source("types.R")
+source("errors.R")
+source("validation.R")
+source("core.R")
+source("invariants.R")
+check_numeric_vec(c(1.0, 2.0))
+xs <- c(1, 2, 3, 4, 5)
+ys <- 2.0 * xs + 1.0
+est <- loess_predict_point(xs, ys, 2.5, span = 0.8)
+stopifnot(abs(est - 6.0) < 1e-10)
+ensure_stat_invariant(TRUE)
