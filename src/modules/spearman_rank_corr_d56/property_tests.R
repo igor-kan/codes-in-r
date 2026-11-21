@@ -1,0 +1,8 @@
+source("types.R")
+source("errors.R")
+source("fast_path.R")
+source("core.R")
+stopifnot(abs(fast_centered_ss(c(1, 2, 3)) - 2.0) < 1e-12)
+a <- c(3.2, 1.4, 1.4, 8.0, 5.1)
+b <- c(9.0, 2.0, 2.0, 12.0, 4.0)
+stopifnot(abs(spearman_rho(a, b) - spearman_rho(b, a)) < 1e-12)
