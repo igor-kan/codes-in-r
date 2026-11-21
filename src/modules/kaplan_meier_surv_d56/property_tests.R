@@ -1,0 +1,8 @@
+source("types.R")
+source("errors.R")
+source("fast_path.R")
+source("core.R")
+stopifnot(abs(fast_centered_ss(c(1, 2, 3)) - 2.0) < 1e-12)
+km <- km_survival_curve(c(1, 2, 4, 6, 9), c(1, 1, 0, 1, 0))
+stopifnot(all(diff(km$surv) <= 1e-12))
+stopifnot(all(km$surv >= 0.0 & km$surv <= 1.0))
