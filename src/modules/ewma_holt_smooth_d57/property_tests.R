@@ -1,0 +1,8 @@
+source("types.R")
+source("errors.R")
+source("fast_path.R")
+source("core.R")
+stopifnot(abs(fast_centered_ss(c(1, 2, 3)) - 2.0) < 1e-12)
+xs <- c(4.2, 9.8, 1.3, 7.7)
+s <- ewma_smooth(xs, alpha = 0.25)
+stopifnot(all(s >= min(xs) - 1e-12) && all(s <= max(xs) + 1e-12))
