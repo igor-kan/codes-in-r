@@ -1,0 +1,7 @@
+source("types.R")
+source("errors.R")
+source("fast_path.R")
+source("core.R")
+stopifnot(abs(fast_centered_ss(c(1, 2, 3)) - 2.0) < 1e-12)
+xs <- c(10, 40, 20, 30)
+stopifnot(quantile_type7(xs, 0.25) <= quantile_type7(xs, 0.75))
