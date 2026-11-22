@@ -1,0 +1,8 @@
+source("types.R")
+source("errors.R")
+source("fast_path.R")
+source("core.R")
+stopifnot(abs(fast_centered_ss(c(1, 2, 3)) - 2.0) < 1e-12)
+p <- c(0.7, 0.2, 0.1)
+q <- c(0.4, 0.4, 0.2)
+stopifnot(kl_divergence(p, q) >= 0.0 && kl_divergence(q, p) >= 0.0)
