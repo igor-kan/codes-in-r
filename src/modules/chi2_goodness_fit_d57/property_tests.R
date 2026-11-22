@@ -1,0 +1,7 @@
+source("types.R")
+source("errors.R")
+source("fast_path.R")
+source("core.R")
+stopifnot(abs(fast_centered_ss(c(1, 2, 3)) - 2.0) < 1e-12)
+obs <- c(18, 22, 30, 30)
+stopifnot(chi2_stat(obs, c(0.2, 0.2, 0.3, 0.3)) >= 0.0)
