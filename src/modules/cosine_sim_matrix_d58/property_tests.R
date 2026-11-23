@@ -1,0 +1,8 @@
+source("types.R")
+source("errors.R")
+source("fast_path.R")
+source("core.R")
+stopifnot(abs(fast_centered_ss(c(1, 2, 3)) - 2.0) < 1e-12)
+M <- rbind(c(2, 3, 4), c(-1, 5, 2), c(3, 3, 3))
+S <- cosine_sim_mat(M)
+stopifnot(max(abs(S - t(S))) < 1e-12 && all(S >= -1.0 - 1e-12 & S <= 1.0 + 1e-12))
