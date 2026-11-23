@@ -1,0 +1,7 @@
+source("types.R")
+source("errors.R")
+source("fast_path.R")
+source("core.R")
+stopifnot(abs(fast_centered_ss(c(1, 2, 3)) - 2.0) < 1e-12)
+a <- c(10, 12, 11, 13, 14)
+stopifnot(max(abs(robust_mad_z(a) - robust_mad_z(a + 500))) < 1e-12)
