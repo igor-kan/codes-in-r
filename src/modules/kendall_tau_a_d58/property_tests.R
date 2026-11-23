@@ -1,0 +1,8 @@
+source("types.R")
+source("errors.R")
+source("fast_path.R")
+source("core.R")
+stopifnot(abs(fast_centered_ss(c(1, 2, 3)) - 2.0) < 1e-12)
+a <- c(4, 1, 7, 3)
+b <- c(2, 9, 5, 6)
+stopifnot(abs(kendall_tau_a(a, b) - kendall_tau_a(b, a)) < 1e-12)
