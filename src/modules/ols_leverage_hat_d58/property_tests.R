@@ -1,0 +1,8 @@
+source("types.R")
+source("errors.R")
+source("fast_path.R")
+source("core.R")
+stopifnot(abs(fast_centered_ss(c(1, 2, 3)) - 2.0) < 1e-12)
+X <- cbind(1.0, c(-2, -1, 0, 1, 2))
+h <- hat_leverage(X)
+stopifnot(abs(h[1] - h[5]) < 1e-12)
