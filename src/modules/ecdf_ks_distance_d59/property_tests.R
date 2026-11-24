@@ -1,0 +1,8 @@
+source("types.R")
+source("errors.R")
+source("fast_path.R")
+source("core.R")
+stopifnot(abs(fast_centered_ss(c(1, 2, 3)) - 2.0) < 1e-12)
+a <- c(1.0, 2.0, 4.0)
+b <- c(2.0, 3.0, 5.0)
+stopifnot(abs(ks_distance_2sample(a, b) - ks_distance_2sample(b, a)) < 1e-12)
