@@ -1,0 +1,7 @@
+source("types.R")
+source("errors.R")
+source("fast_path.R")
+source("core.R")
+stopifnot(abs(fast_centered_ss(c(1, 2, 3)) - 2.0) < 1e-12)
+a <- roc_auc_exact(c(0.2, 0.5, 0.5, 0.8), c(0L, 1L, 0L, 1L))
+stopifnot(a >= 0.0 && a <= 1.0 && abs(a - 0.875) < 1e-12)
