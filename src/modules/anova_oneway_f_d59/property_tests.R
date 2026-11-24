@@ -1,0 +1,8 @@
+source("types.R")
+source("errors.R")
+source("fast_path.R")
+source("core.R")
+stopifnot(abs(fast_centered_ss(c(1, 2, 3)) - 2.0) < 1e-12)
+v <- c(5, 6, 7, 5, 6, 7)
+g <- c("x", "x", "x", "y", "y", "y")
+stopifnot(abs(oneway_f_stat(v, g) - 0.0) < 1e-12)
