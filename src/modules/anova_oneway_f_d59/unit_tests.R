@@ -1,0 +1,12 @@
+source("types.R")
+source("errors.R")
+source("validation.R")
+source("core.R")
+source("invariants.R")
+check_numeric_vec(c(1.0, 2.0))
+v <- c(2, 3, 4, 10, 11, 12)
+g <- c("a", "a", "a", "b", "b", "b")
+fval <- oneway_f_stat(v, g)
+ref <- stats::oneway.test(v ~ g, var.equal = TRUE)$statistic
+stopifnot(abs(fval - as.numeric(ref)) < 1e-10)
+ensure_stat_invariant(TRUE)
