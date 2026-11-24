@@ -1,0 +1,7 @@
+source("types.R")
+source("errors.R")
+source("fast_path.R")
+source("core.R")
+stopifnot(abs(fast_centered_ss(c(1, 2, 3)) - 2.0) < 1e-12)
+fit <- beta_mom_fit(c(0.4, 0.6, 0.5, 0.45, 0.55))
+stopifnot(abs(fit$alpha - fit$beta) < 1e-11)
