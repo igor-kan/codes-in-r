@@ -1,0 +1,7 @@
+source("types.R")
+source("errors.R")
+source("fast_path.R")
+source("core.R")
+stopifnot(abs(fast_centered_ss(c(1, 2, 3)) - 2.0) < 1e-12)
+x <- c(-4.0, 0.0, 7.2)
+stopifnot(all(abs(soft_threshold(x, 0.0) - x) < 1e-12))
