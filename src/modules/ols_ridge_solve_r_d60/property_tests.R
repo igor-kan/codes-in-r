@@ -1,0 +1,10 @@
+source("types.R")
+source("errors.R")
+source("fast_path.R")
+source("core.R")
+stopifnot(abs(fast_centered_ss(c(1, 2, 3)) - 2.0) < 1e-12)
+X <- cbind(1, 1:8, (1:8) * 0.5 + c(0.1, -0.1, 0.2, -0.2, 0.1, -0.1, 0.05, -0.05))
+y <- 1.0 + 2.0 * X[, 2] - X[, 3]
+f1 <- fit_ridge_l2(X, y, lambda = 0.5)
+f2 <- fit_ridge_l2(X, y, lambda = 10.0)
+stopifnot(f2$l2_norm < f1$l2_norm)
