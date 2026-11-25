@@ -1,0 +1,12 @@
+source("types.R")
+source("errors.R")
+source("validation.R")
+source("core.R")
+source("invariants.R")
+check_numeric_vec(c(1.0, 2.0))
+X <- matrix(c(1, 1, 1, 1, 1, 2, 3, 4), ncol = 2)
+y <- 2.0 + 3.0 * X[, 2]
+f0 <- fit_ridge_l2(X, y, lambda = 0.0)
+stopifnot(abs(f0$beta[1] - 2.0) < 1e-9)
+stopifnot(abs(f0$beta[2] - 3.0) < 1e-9)
+ensure_stat_invariant(TRUE)
